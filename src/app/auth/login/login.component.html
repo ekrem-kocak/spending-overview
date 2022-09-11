@@ -1,7 +1,7 @@
 <div class="login-container">
-    <div class="login-box">
-        <h2>Login</h2>
-        <form >
+    <div class="login-box" *ngIf="!loading else waiting">
+        <h2 [ngStyle]="{'color': isLogin ? '#03e9f4' : '#fff'}" >{{isLogin?'LOGIN':'SIGN UP'}}</h2>
+        <form>
             <div class="user-box">
                 <input type="text" name="" required="">
                 <label>Username</label>
@@ -10,13 +10,37 @@
                 <input type="password" name="" required="" autocomplete="new-password">
                 <label>Password</label>
             </div>
-            <a href="#">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                Submit
-            </a>
+            <div class="user-box" *ngIf="!isLogin">
+                <input type="password" name="" required="" autocomplete="new-password">
+                <label>Repassword</label>
+            </div>
+            <div class="user-box" *ngIf="!isLogin">
+                <input class="m-0" type="email" name="" required="" autocomplete="new-password">
+                <label>Email</label>
+                <div class="form-text">If you forget your password, you can reset it via email.</div>
+            </div>
+            <div class="d-flex justify-content-between">
+                <a class="login-button" (click)="changeLogin(true)" [ngClass]="{'order-2': !isLogin}">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    {{!isLogin?'Go':''}} Login
+                </a>
+                
+                
+                <a class="register-button" (click)="changeLogin(false)" [ngClass]="{'order-1': !isLogin}">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Sign Up
+                </a>
+            </div>
         </form>
     </div>
 </div>
+
+<ng-template #waiting>
+    <app-waiting></app-waiting>
+</ng-template>
