@@ -221,3 +221,38 @@
     bottom: 100%;
   }
 }
+
+.google-button {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  height: 50px;
+  border: 1px solid #bfc0c6;
+  background-color: transparent;
+  border-radius: 5px;
+  text-align: left
+}
+
+.google-button:focus {
+  outline: 0
+}
+
+.google-button:hover {
+  box-shadow: 0 2px 5px #eaeaec
+}
+
+.login-gplus-logo {
+  background-position: -298px 0!important;
+  width: 23px;
+  top: 13px
+}
+
+.login-gplus-logo {
+  height: 29px;
+  position: absolute;
+  left: 15px
+}
