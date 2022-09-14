@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MaterialModule } from './material.module';
+
 import { WaitingComponent } from './waiting/waiting.component';
 
 
@@ -9,7 +11,8 @@ import { WaitingComponent } from './waiting/waiting.component';
     WaitingComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MaterialModule
   ],
   exports:[
     WaitingComponent
