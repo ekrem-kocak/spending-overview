@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -7,6 +7,7 @@ import { AuthService } from '../auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
 
   isLogin: boolean = true;
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
     this.authForm = new FormGroup({
       'username': new FormControl('', Validators.required),
       'password': new FormControl('', Validators.required),
-      'repassword': new FormControl(''),
+      'repassword': new FormControl('',),
       'email': new FormControl('')
     })
   }
@@ -52,9 +53,9 @@ export class LoginComponent implements OnInit {
       if (this.isLogin) {
         this.authService.SignIn(this.authForm.get('username')?.value, this.authForm.get('password')?.value)
       } else {
-        if(this.authForm.get('password')?.value === this.authForm.get('repassword')?.value){
+        if (this.authForm.get('password')?.value === this.authForm.get('repassword')?.value) {
           this.authService.SignUp(this.authForm.get('email')?.value, this.authForm.get('password')?.value).then()
-        }else{
+        } else {
           // passwords did not match
         }
       }
