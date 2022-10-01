@@ -11,6 +11,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from '@firebase/util';
 import { map } from 'rxjs/operators'
+import { AlertService } from '../shared/services/alert.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -22,7 +23,8 @@ export class AuthService {
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
     public ngZone: NgZone, // NgZone service to remove outside scope warning
-    private http: HttpClient
+    private http: HttpClient,
+    private alertService: AlertService
   ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
@@ -50,7 +52,7 @@ export class AuthService {
         });
       })
       .catch((error) => {
-        window.alert(error.message);
+        this.alertService.error(error.message);
       });
   }
   // Sign up with email/password
@@ -65,7 +67,7 @@ export class AuthService {
         this.SignIn(email, password);
       })
       .catch((error) => {
-        window.alert(error.message);
+        this.alertService.error(error.message);
       });
   }
   // Send email verfificaiton when new user sign up
@@ -81,10 +83,10 @@ export class AuthService {
     return this.afAuth
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
-        window.alert('Password reset email sent, check your inbox.');
+        this.alertService.error('Password reset email sent, check your inbox.');
       })
       .catch((error) => {
-        window.alert(error);
+        this.alertService.error(error);
       });
   }
   // Returns true when user is looged in and email is verified
@@ -108,7 +110,7 @@ export class AuthService {
         this.SetUserData(result.user);
       })
       .catch((error) => {
-        window.alert(error);
+        this.alertService.error(error);
       });
   }
   /* Setting up user data when sign in with username/password, 
