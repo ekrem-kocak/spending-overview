@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { Component, EventEmitter, HostBinding, OnInit, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { ThemeService } from '../shared/services/theme-mode.service';
 
 @Component({
   selector: 'app-auth',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthComponent implements OnInit {
 
-  constructor() { }
+  toggleControl: FormControl;
+
+  constructor(private themeService: ThemeService) {
+    const darkMode = localStorage.getItem('darkMode');
+    if (darkMode) {
+      this.toggleControl = new FormControl(JSON.parse(darkMode));
+    } else {
+      this.toggleControl = new FormControl(true);
+    }
+  }
 
   ngOnInit(): void {
+    this.toggleControl.valueChanges.subscribe((isDarkMode) => {
+      if (isDarkMode != null) {
+        this.themeService.toggleTheme(isDarkMode);
+      }
+    });
   }
 
 }
