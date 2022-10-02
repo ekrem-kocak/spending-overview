@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AlertService } from 'src/app/shared/services/alert.service';
 import { AuthService } from '../auth.service';
 import { UserForRegister } from '../models/userForRegister.model';
 
@@ -13,9 +14,9 @@ export class SignupComponent {
   signupForm: FormGroup;
   hide = true;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private alertService: AlertService) {
     this.signupForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
+      email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
       username: new FormControl('', [Validators.required, Validators.minLength(5)]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)])
     })
@@ -34,6 +35,8 @@ export class SignupComponent {
 
     if (this.signupForm.valid) {
       this.authService.SignUp(user.username, user.email, user.password);
+    } else {
+      this.alertService.error("Please fill in all fields correctly.");
     }
   }
 
@@ -45,8 +48,8 @@ export class SignupComponent {
       req.push('You must enter a value.');
     if (err?.minlength)
       req.push(`Must be a minimum of ${err.minlength.requiredLength} characters.`);
-    if (err?.email)
-      req.push('Not a valid email.');
+    if (err?.pattern)
+      req.push('Not a valid.');
 
     return req;
   }

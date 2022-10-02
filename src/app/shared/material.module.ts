@@ -10,7 +10,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatInputModule } from '@angular/material/input';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -25,7 +25,8 @@ import { MatInputModule } from '@angular/material/input';
     MatCheckboxModule,
     MatExpansionModule,
     MatSlideToggleModule,
-    MatInputModule
+    MatInputModule,
+    MatSnackBarModule
   ],
   exports: [
     MatButtonModule,
@@ -37,7 +38,8 @@ import { MatInputModule } from '@angular/material/input';
     MatCheckboxModule,
     MatExpansionModule,
     MatSlideToggleModule,
-    MatInputModule
+    MatInputModule,
+    MatSnackBarModule
   ]
 })
 export class MaterialModule { }
