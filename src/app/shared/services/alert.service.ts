@@ -10,7 +10,7 @@ export class AlertService {
 
   error(message: string) {
     this._snackBar.open(message, '', {
-      duration: 3000,
+      duration: 7500,
       verticalPosition: 'top',
       panelClass:['mat-toolbar', 'mat-primary'],
     });

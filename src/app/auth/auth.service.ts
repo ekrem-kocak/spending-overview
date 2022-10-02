@@ -40,7 +40,7 @@ export class AuthService {
     });
   }
   // Sign in with email/password
-  SignIn(email: string, password: string) {
+  SignIn(email: string, password: string, isUsername: boolean = false) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
@@ -52,23 +52,34 @@ export class AuthService {
         });
       })
       .catch((error) => {
-        this.alertService.error(error.message);
+        if (isUsername)
+          this.alertService.error("Username or password is incorrect.");
+        else
+          this.alertService.error("Email or password is incorrect.");
       });
   }
   // Sign up with email/password
   SignUp(username: string, email: string, password: string) {
-    return this.afAuth
-      .createUserWithEmailAndPassword(email, password)
-      .then((result) => {
-        /* Call the SendVerificaitonMail() function when new user sign 
-        up and returns promise */
-        // this.SendVerificationMail();
-        this.SetUserData(result.user, username);
-        this.SignIn(email, password);
-      })
-      .catch((error) => {
-        this.alertService.error(error.message);
-      });
+    this.getUsernameWithEmail(username).subscribe((_email: any) => {
+      if (_email) {
+        this.alertService.error("Username already taken.");
+        return;
+      } else {
+        return this.afAuth
+          .createUserWithEmailAndPassword(email, password)
+          .then((result) => {
+            /* Call the SendVerificaitonMail() function when new user sign 
+            up and returns promise */
+            // this.SendVerificationMail();
+            this.SetUserData(result.user, username);
+            this.SignIn(email, password);
+          })
+          .catch((error) => {
+            this.alertService.error("Email address already taken.");
+          });
+      }
+    })
+
   }
   // Send email verfificaiton when new user sign up
   SendVerificationMail() {
@@ -79,14 +90,18 @@ export class AuthService {
       });
   }
   // Reset Forggot password
-  ForgotPassword(passwordResetEmail: string) {
+  ForgotPassword(passwordResetEmail: string, isUsername: boolean) {
     return this.afAuth
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
         this.alertService.error('Password reset email sent, check your inbox.');
       })
       .catch((error) => {
-        this.alertService.error(error);
+        if (isUsername) {
+          this.alertService.error("Wrong username.");
+        } else {
+          this.alertService.error("Wrong email.");
+        }
       });
   }
   // Returns true when user is looged in and email is verified
@@ -144,7 +159,7 @@ export class AuthService {
     });
   }
 
-  getUsername(email: string) {
+  getUsernameWithEmail(email: string) {
     return this.http.get(this.apiUrl + '/usernames.json')
       .pipe(
         map((res: any) => {
@@ -152,7 +167,7 @@ export class AuthService {
           for (const key in res) {
             req.push({ ...res[key] })
           }
-          return req;
+          return req.find(i => i.username == email)?.email;
         })
       );
   }
