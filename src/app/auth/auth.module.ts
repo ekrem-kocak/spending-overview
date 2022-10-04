@@ -21,7 +21,7 @@ import { SignupComponent } from './signup/signup.component';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    SharedModule
+    SharedModule,
   ],
   providers:[
     AuthService

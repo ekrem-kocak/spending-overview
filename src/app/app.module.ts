@@ -13,6 +13,9 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
+import { HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';  
 
 @NgModule({
   declarations: [
@@ -31,9 +34,21 @@ import { AppComponent } from './app.component';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    // 
+    //
+    
+    TranslateModule.forRoot({  
+      loader: {  
+         provide: TranslateLoader,  
+         useFactory: httpTranslateLoader,  
+         deps: [HttpClient]  
+         }  
+      })  
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function httpTranslateLoader(http: HttpClient) {  
+  return new TranslateHttpLoader(http);
+}

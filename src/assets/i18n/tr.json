@@ -1,0 +1,14 @@
+{
+    "translateButtons":{
+        "button.en": "İngilizce",
+        "button.tr": "Türkçe"
+    },
+    "signIn": {
+        "title": "Giriş Yap",
+        "email.label": "Kullanıcı Adı veya Email",
+        "password.label": "Şifrenizi giriniz",
+        "button.name": "Giriş Yap",
+        "register.button": "Kayıt Ol",
+        "forgotpassword.button": "Şifrenizi mi unuttunuz ?"
+    }
+}

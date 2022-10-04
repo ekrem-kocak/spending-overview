@@ -1,0 +1,15 @@
+{
+    "translateButtons":{
+        "button.en": "English",
+        "button.tr": "Turkish"
+    },
+    "signIn": {
+        "title": "Login Form",
+        "email.label": "Username or Email",
+        "password.label": "Enter your password",
+        "button.name": "Sign In",
+        "register.button": "Sign Up",
+        "forgotpassword.button": "Forgot Password ?"
+        
+    }
+}

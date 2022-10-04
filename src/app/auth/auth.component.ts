@@ -1,6 +1,7 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, EventEmitter, HostBinding, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { LanguageService } from '../shared/services/language.service';
 import { ThemeService } from '../shared/services/theme-mode.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class AuthComponent implements OnInit {
 
   toggleControl: FormControl;
 
-  constructor(private themeService: ThemeService) {
+  constructor(private themeService: ThemeService, private languageService: LanguageService) {
     const darkMode = localStorage.getItem('darkMode');
     if (darkMode) {
       this.toggleControl = new FormControl(JSON.parse(darkMode));

@@ -5,19 +5,23 @@ import { MaterialModule } from './material.module';
 import { WaitingComponent } from './waiting/waiting.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { LanguageSelectorComponent } from './language-selector/language-selector.component';
 
 
 
 @NgModule({
   declarations: [
-    WaitingComponent
+    WaitingComponent,
+    LanguageSelectorComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ],
   exports:[
     CommonModule,
@@ -25,7 +29,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    WaitingComponent
+    TranslateModule,
+
+    /* componenets */
+    WaitingComponent,
+    LanguageSelectorComponent
+    /* end componenets */
+
   ]
 })
 export class SharedModule { }

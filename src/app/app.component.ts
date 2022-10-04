@@ -2,6 +2,7 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, HostBinding, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ThemeService } from './shared/services/theme-mode.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -12,7 +13,10 @@ import { ThemeService } from './shared/services/theme-mode.service';
 export class AppComponent {
   @HostBinding('class') className = '';
 
-  constructor(private themeService: ThemeService, private overlay: OverlayContainer) { }
+  constructor(private themeService: ThemeService, private overlay: OverlayContainer, public translate: TranslateService) {
+    translate.addLangs(['en', 'tr']);
+    translate.setDefaultLang('en');;
+  }
 
   ngOnInit(): void {
     this.themeService.themeChange.subscribe(isDarkMode => {

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  firebaseConfig : {
+  firebaseConfig: {
     apiKey: "",
     authDomain: "",
     databaseURL: "",
@@ -12,7 +12,7 @@ export const environment = {
     storageBucket: "",
     messagingSenderId: "",
     appId: ""
-  }  
+  }
 };
 
 /*
